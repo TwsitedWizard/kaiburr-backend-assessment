@@ -162,3 +162,40 @@ This image shows a DELETE request to the /tasks/{id} endpoint. The server succes
 <img width="1911" height="1076" alt="SS5" src="https://github.com/user-attachments/assets/6635196b-7e20-4850-8c0d-b05adafcbea1" />
 
 
+---
+
+## Task 2: Containerization and Deployment
+
+This section details the steps to containerize the application with Docker and deploy it to a Kubernetes cluster.
+
+### Build and Push the Docker Image
+
+1.  Navigate to the `task-api` directory which contains the `Dockerfile`.
+2.  Build the Docker image:
+    ```bash
+    # Replace 'saran39' with your Docker Hub username
+    docker build -t saran39/kaiburr-task-app:latest .
+    ```
+3.  Log in to Docker Hub and push the image:
+    ```bash
+    docker login
+    docker push saran39/kaiburr-task-app:latest
+    ```
+
+### Deploy to Kubernetes
+
+1.  Ensure your Kubernetes cluster (e.g., from Docker Desktop) is running.
+2.  Apply all the manifest files from the `task-api` directory:
+    ```bash
+    kubectl apply -f mongodb-statefulset.yaml
+    kubectl apply -f rbac.yaml
+    kubectl apply -f deployment.yaml
+    kubectl apply -f service.yaml
+    ```
+3.  Verify that the pods are running:
+    ```bash
+    kubectl get pods
+    ```
+4.  The application will be accessible at `http://localhost:30080`.
+
+### Task 2 Screenshots
