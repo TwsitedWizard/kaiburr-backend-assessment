@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: task-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: task-api
+  template:
+    metadata:
+      labels:
+        app: task-api
+    spec:
+      serviceAccountName: task-api-sa
+      containers:
+      - name: task-api
+        image: saran39/kaiburr-task-app:latest 
+        ports:
+        - containerPort: 8080
+        env:
+        - name: spring.data.mongodb.uri
+          value: "mongodb://mongo-service:27017/kaiburr_db"
