@@ -199,3 +199,22 @@ This section details the steps to containerize the application with Docker and d
 4.  The application will be accessible at `http://localhost:30080`.
 
 ### Task 2 Screenshots
+Screenshot 1: Deployment to Kubernetes
+This image shows the successful deployment process. After pushing the Docker image, all Kubernetes manifest files (mongodb-statefulset.yaml, rbac.yaml, deployment.yaml, and service.yaml) are applied. The kubectl get pods command confirms that both the mongo-0 and the task-api-deployment pods are successfully running in the cluster.
+<img width="1908" height="1075" alt="SS1" src="https://github.com/user-attachments/assets/0f25caa5-598c-46fa-b9b3-41dac831423e" />
+
+Screenshot 2: Creating a Task via Kubernetes Service
+This image demonstrates creating a new task by sending a PUT request to http://localhost:30080/tasks/. The port 30080 confirms the request is being routed through the Kubernetes NodePort service. The server responds with 200 OK and returns the newly created task object.
+<img width="1911" height="1077" alt="ss2" src="https://github.com/user-attachments/assets/cdccadd6-c988-438b-bbd2-09d255ff1ce3" />
+
+Screenshot 3: Getting All Tasks
+This image confirms the get-all functionality by sending a GET request to http://localhost:30080/tasks/. The API responds with a JSON array containing all tasks stored in the MongoDB database running within the cluster.
+<img width="1910" height="1075" alt="SS3" src="https://github.com/user-attachments/assets/91e8c823-3439-4509-ae2c-be439d25b958" />
+
+
+
+
+
+
+
+
