@@ -173,7 +173,6 @@ This section details the steps to containerize the application with Docker and d
 1.  Navigate to the `task-api` directory which contains the `Dockerfile`.
 2.  Build the Docker image:
     ```bash
-    # Replace 'saran39' with your Docker Hub username
     docker build -t saran39/kaiburr-task-app:latest .
     ```
 3.  Log in to Docker Hub and push the image:
