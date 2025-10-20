@@ -210,6 +210,39 @@ Screenshot 3: Getting All Tasks
 This image confirms the get-all functionality by sending a GET request to http://localhost:30080/tasks/. The API responds with a JSON array containing all tasks stored in the MongoDB database running within the cluster.
 <img width="1910" height="1075" alt="SS3" src="https://github.com/user-attachments/assets/91e8c823-3439-4509-ae2c-be439d25b958" />
 
+---
+
+## Task 4: CI/CD Pipeline with GitHub Actions
+
+This project is configured with a Continuous Integration (CI) pipeline using GitHub Actions. The pipeline automates the build and containerization process, ensuring that a fresh, tested Docker image is available after every code change.
+
+### CI Workflow
+
+The workflow is defined in the `.github/workflows/build.yml` file and performs the following steps on every push to the `main` branch:
+
+1.  **Checkout Code**: The repository code is checked out.
+2.  **Set up JDK**: A Java 17 environment is configured.
+3.  **Build with Maven**: The Spring Boot application is compiled and packaged into a `.jar` file.
+4.  **Log in to Registry**: The workflow authenticates with the GitHub Container Registry (GHCR).
+5.  **Build and Push Docker Image**: A new Docker image is built and pushed to GHCR.
+
+### Development Challenges & Solutions
+
+During the setup of the CI pipeline, two significant challenges were encountered and resolved:
+
+* **Docker Hub Service Outage**: The initial plan was to use Docker Hub as the container registry. However, a widespread service outage (confirmed by `503 Service Unavailable` errors) blocked access to both the Docker Hub website and its authentication services.
+    * **Solution**: To meet the project deadline, a workaround was implemented. The CI pipeline was reconfigured to use the **GitHub Container Registry (GHCR)**, which bypassed the external dependency on Docker Hub.
+
+* **GHCR Image Tagging Issue**: The GHCR requires all repository names in an image tag to be in lowercase. The build failed because my GitHub username (`TwsitedWizard`) contains uppercase letters.
+    * **Solution**: A step was added to the workflow file that uses a shell command (`tr '[:upper:]' '[:lower:]'`) to convert the GitHub username to lowercase. This lowercase version is then stored in an environment variable and used to construct a valid image tag.
+
+### Task 4 Screenshots
+
+#### Successful Workflow Run
+This screenshot shows the successful completion of the GitHub Actions workflow. The green checkmark indicates that all steps, including building the Maven project and pushing the Docker image to GHCR, ran without errors.
+
+<img width="1912" height="1078" alt="SS2" src="https://github.com/user-attachments/assets/bac8a59a-f300-4b02-bb2a-3fce62fac757" />
+
 
 
 
