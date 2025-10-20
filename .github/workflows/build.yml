@@ -39,9 +39,12 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Convert owner to lowercase
+        run: echo "OWNER_LC=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_ENV
+
       - name: Build and push Docker image to GHCR
         uses: docker/build-push-action@v4
         with:
           context: ./task-api
           push: true
-          tags: ghcr.io/${{ toLower(github.repository_owner) }}/kaiburr-task-app:latest
+          tags: ghcr.io/${{ env.OWNER_LC }}/kaiburr-task-app:latest
