@@ -44,4 +44,4 @@ jobs:
         with:
           context: ./task-api
           push: true
-          tags: ghcr.io/${{ toLowerCase(github.repository_owner) }}/kaiburr-task-app:latest
+          tags: ghcr.io/${{ toLower(github.repository_owner) }}/kaiburr-task-app:latest
